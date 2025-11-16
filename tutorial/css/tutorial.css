@@ -1,0 +1,517 @@
+/**
+ * @file tutorial.css
+ * @description Styling für das emotionale Start-Tutorial von DailyQuest
+ * Enthält: Schwarzer Vollbild-Overlay, pulsierender Kreis, Text-Animationen
+ */
+
+/* Tutorial Container - Vollbild-Overlay */
+#tutorial-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000000;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.8s ease;
+}
+
+#tutorial-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Pulsierender Kreis im Hintergrund - Dunkles Pastel Grün */
+.tutorial-pulse-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(95, 133, 117, 0.4) 0%, rgba(95, 133, 117, 0.25) 25%, rgba(95, 133, 117, 0.12) 45%, rgba(95, 133, 117, 0.05) 65%, rgba(95, 133, 117, 0.01) 85%, rgba(95, 133, 117, 0) 100%);
+    animation: tutorial-pulse 5s ease-in-out infinite;
+    pointer-events: none;
+    filter: blur(20px);
+}
+
+@keyframes tutorial-pulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.9;
+    }
+}
+
+/* Tutorial Text Container */
+#tutorial-text-container {
+    position: relative;
+    z-index: 10001;
+    max-width: 90%;
+    width: 600px;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Tutorial Text - Animierte Einblendung */
+.tutorial-text {
+    color: #e0e0e0;
+    font-size: 1.8rem;
+    font-weight: 300;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+    opacity: 0;
+    animation: tutorial-fade-in 1.2s ease-in forwards;
+}
+
+@keyframes tutorial-fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tutorial-text.fade-out {
+    animation: tutorial-fade-out 0.8s ease-out forwards;
+}
+
+@keyframes tutorial-fade-out {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* Tutorial Namenseingabe */
+#tutorial-name-input-container {
+    position: relative;
+    z-index: 10001;
+    width: 90%;
+    max-width: 400px;
+    opacity: 0;
+    animation: tutorial-fade-in 1.2s ease-in forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#tutorial-name-input-container.fade-out {
+    animation: tutorial-fade-out 0.8s ease-out forwards;
+}
+
+#tutorial-name-input {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 1.4rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(95, 133, 117, 0.6);
+    border-radius: 12px;
+    color: #e0e0e0;
+    text-align: center;
+    outline: none;
+    transition: all 0.3s ease;
+    font-family: 'Roboto', sans-serif;
+}
+
+#tutorial-name-input:focus {
+    border-color: #5f8575;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 20px rgba(95, 133, 117, 0.3);
+}
+
+#tutorial-name-input::placeholder {
+    color: rgba(224, 224, 224, 0.4);
+}
+
+#tutorial-name-submit {
+    margin-top: 20px;
+    padding: 14px 40px;
+    font-size: 1.2rem;
+    background: #5f8575;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    width: auto;
+    align-self: center;
+}
+
+#tutorial-name-submit:hover {
+    background: #6fa086;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(95, 133, 117, 0.4);
+}
+
+#tutorial-name-submit:active {
+    transform: translateY(0);
+}
+
+/* Tutorial Continue Button */
+#tutorial-continue-btn {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10001;
+    padding: 16px 50px;
+    font-size: 1.3rem;
+    background: rgba(95, 133, 117, 0.5);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 8px rgba(95, 133, 117, 0.3), 0 0 0 0 rgba(95, 133, 117, 0.25);
+}
+
+/* Fade-In Animation beim Erscheinen */
+@keyframes tutorial-button-appear {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Pulsation Animation */
+@keyframes tutorial-button-pulse {
+    0%, 100% {
+        box-shadow: 0 0 8px rgba(95, 133, 117, 0.3), 0 0 0 0 rgba(95, 133, 117, 0.25);
+    }
+    50% {
+        box-shadow: 0 0 12px rgba(95, 133, 117, 0.4), 0 0 0 8px rgba(95, 133, 117, 0);
+    }
+}
+
+/* Kombiniere beide Animationen wenn Button nicht versteckt ist */
+#tutorial-continue-btn:not(.hidden) {
+    animation: tutorial-button-appear 1s ease-out 0.5s both, tutorial-button-pulse 2s ease-in-out 1.5s infinite;
+}
+
+#tutorial-continue-btn:hover {
+    background: rgba(111, 160, 134, 0.6);
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 0 15px rgba(95, 133, 117, 0.5), 0 2px 8px rgba(95, 133, 117, 0.2);
+}
+
+#tutorial-continue-btn:active {
+    transform: translateX(-50%) scale(0.98);
+}
+
+#tutorial-continue-btn.hidden {
+    display: none;
+}
+
+/* App Reveal Animation */
+#tutorial-overlay.reveal {
+    animation: tutorial-slide-up 1.5s ease-in-out forwards;
+}
+
+@keyframes tutorial-slide-up {
+    0% {
+        clip-path: inset(0 0 0 0);
+    }
+    100% {
+        clip-path: inset(0 0 100% 0);
+    }
+}
+
+/* Tour Overlay - Halbtransparent für Feature-Tour */
+#tutorial-tour-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: none;
+    pointer-events: none;
+}
+
+#tutorial-tour-overlay.active {
+    display: block;
+}
+
+/* Dungeon-Chip soll über dem Tour-Overlay liegen */
+#dungeon-spawn-chip {
+    z-index: 10003 !important;
+}
+
+/* Tour Highlight - Hebt aktuelles Element hervor */
+.tutorial-highlight {
+    position: fixed;
+    z-index: 10001;
+    pointer-events: none;
+    border: 3px solid #5f8575;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(95, 133, 117, 0.6), inset 0 0 20px rgba(95, 133, 117, 0.2);
+    transition: all 0.4s ease;
+}
+
+/* Extra Quest Box - Anpassung für Tutorial */
+#extra-quest-inactive.tutorial-highlight-target {
+    margin-bottom: 24px;
+}
+
+/* Tour Info Box */
+#tutorial-tour-info {
+    position: fixed;
+    z-index: 10002;
+    background: rgba(18, 18, 18, 0.95);
+    backdrop-filter: blur(10px);
+    border: 2px solid #5f8575;
+    border-radius: 16px;
+    padding: 16px;
+    max-width: 380px;
+    width: calc(100% - 40px);
+    max-height: 50vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    display: none;
+    /* Position wird von JavaScript gesetzt - keine Standard-Positionierung */
+    pointer-events: auto;
+}
+
+#tutorial-tour-info.active {
+    display: block;
+    animation: tutorial-fade-in 0.6s ease-in forwards;
+}
+
+#tutorial-tour-info h3 {
+    color: #5f8575;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+#tutorial-tour-info p {
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+#tutorial-tour-next {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background: #5f8575;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+}
+
+#tutorial-tour-next:hover {
+    background: #6fa086;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(95, 133, 117, 0.4);
+}
+
+#tutorial-tour-next:active {
+    transform: translateY(0);
+}
+
+/* Tour Progress Indicator - DEAKTIVIERT */
+#tutorial-tour-progress {
+    display: none !important;
+}
+
+/* Dynamic Tutorial Overlay - für einzelne Seiten */
+#tutorial-dynamic-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    display: none;
+    pointer-events: none;
+}
+
+#tutorial-dynamic-overlay.active {
+    display: block;
+}
+
+/* Dynamic Tutorial Highlight */
+#tutorial-dynamic-highlight {
+    position: fixed;
+    z-index: 10000;
+    pointer-events: none;
+    border: 3px solid #5f8575;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(95, 133, 117, 0.6), inset 0 0 20px rgba(95, 133, 117, 0.2);
+    transition: all 0.4s ease;
+}
+
+/* Dynamic Tutorial Info Box */
+#tutorial-dynamic-info {
+    position: fixed;
+    z-index: 10001;
+    background: rgba(18, 18, 18, 0.95);
+    backdrop-filter: blur(10px);
+    border: 2px solid #5f8575;
+    border-radius: 16px;
+    padding: 16px;
+    max-width: 380px;
+    width: calc(100% - 32px);
+    max-height: 50vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    display: none;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    pointer-events: auto;
+}
+
+#tutorial-dynamic-info.active {
+    display: block;
+    animation: tutorial-fade-in 0.6s ease-in forwards;
+}
+
+.tutorial-dynamic-info {
+    position: fixed;
+    z-index: 10001;
+    background: rgba(18, 18, 18, 0.95);
+    backdrop-filter: blur(10px);
+    border: 2px solid #5f8575;
+    border-radius: 16px;
+    padding: 16px;
+    max-width: 380px;
+    width: calc(100% - 32px);
+    max-height: 50vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    display: none;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    pointer-events: auto;
+}
+
+.tutorial-dynamic-info.active {
+    display: block;
+    animation: tutorial-fade-in 0.6s ease-in forwards;
+}
+
+.tutorial-info-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.tutorial-info-content h3 {
+    color: #5f8575;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.tutorial-info-content p {
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.tutorial-continue-btn {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background: #5f8575;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+}
+
+.tutorial-continue-btn:hover {
+    background: #6fa086;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(95, 133, 117, 0.4);
+}
+
+.tutorial-continue-btn:active {
+    transform: translateY(0);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .tutorial-text {
+        font-size: 1.4rem;
+    }
+    
+    #tutorial-name-input {
+        font-size: 1.2rem;
+    }
+    
+    .tutorial-pulse-circle {
+        width: 200px;
+        height: 200px;
+    }
+    
+    #tutorial-tour-info {
+        max-width: 90%;
+        padding: 20px;
+    }
+    
+    #tutorial-tour-info h3 {
+        font-size: 1.3rem;
+    }
+    
+    #tutorial-tour-info p {
+        font-size: 1rem;
+    }
+    
+    #tutorial-dynamic-info,
+    .tutorial-dynamic-info {
+        max-width: 90%;
+        padding: 20px;
+    }
+    
+    .tutorial-info-content h3 {
+        font-size: 1.3rem;
+    }
+    
+    .tutorial-info-content p {
+        font-size: 1rem;
+    }
+}
